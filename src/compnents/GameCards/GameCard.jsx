@@ -7,13 +7,18 @@ export default function GameCard(props) {
     })
 
     function handleClick(event) {
-        if (state.cardValue === "x" && state.currentTurn === 'o') {
+        if (state.cardValue === "x") {
             setState({...state, cardValue: "o"})
-        } else if (state.cardValue === "o" && state.currentTurn === 'x') {
-            setState({...state, cardValue: "x"})
-        } else if (state.cardValue === "") {
-            setState({...state, cardValue: state.currentTurn})
         } 
+        
+        if (state.cardValue === "o") {
+            setState({...state, cardValue: "x"})
+        } 
+        
+        if (state.cardValue === "") {
+            setState({...state, cardValue: props.currentTurn})
+        } 
+
         // Change turn after every click
         props.changeTurn()
     }

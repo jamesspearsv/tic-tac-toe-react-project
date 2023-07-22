@@ -8,7 +8,11 @@ function App() {
   })
 
   function changeTurn() {
-    alert('change turn!')
+    if (state.currentTurn === 'x') {
+      setState({...state, currentTurn: 'o'})
+    } else (
+      setState({...state, currentTurn: 'x'})
+    )
   }
 
   function drawGameBoard(boardSize) {
