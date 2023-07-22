@@ -2,15 +2,11 @@ import { useState } from "react";
 
 export default function GameCard(props) {
 
-    const [value, setValue] = useState(null)
-
     function handleClick() {
-        console.log('Clicked!')
         props.updateBoard(props.index)
-        setValue(value)
     }
 
-    if (value === "O") {
+    if (props.value == "O") {
         return (
             <td onClick={handleClick}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="125" height="125" fill="currentColor" className="bi bi-circle" viewBox="0 0 16 16">
@@ -18,7 +14,7 @@ export default function GameCard(props) {
                 </svg>
             </td>
         )
-    } else if (value === "X") {
+    } else if (props.value == "X") {
         return (
             <td onClick={handleClick}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="125" height="125" fill="currentColor" className="bi bi-x-lg" viewBox="0 0 16 16">

@@ -24,3 +24,8 @@ td {
   width: 150px;
   height: 150px;
 }
+
+button {
+  height: 35px;
+  width: 85px;
+}

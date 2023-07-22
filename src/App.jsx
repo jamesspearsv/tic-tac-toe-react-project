@@ -1,24 +1,59 @@
 import { useState } from 'react'
 import './App.css'
 import GameCard from './compnents/GameCards/GameCard'
+import Status from './compnents/Status'
 
-function App() {
+export default function App() {
 
-  const [state, setState] = useState({
-    isXNext: false
-  })
+  // App States
+  const [isXTurn, setIsXTurn] = useState(true)
   const [board, setBoard] = useState(Array(9).fill(null))
+  const [turnCount, setTurnCount] = useState(0)
   
+  // App functions
   function updateBoard(index) {
-    const newBoard = board.slice()
-    if (state.isXNext) {
-      newBoard[index] = "O"
-    } else {
-      newBoard[index] = "X"
-    }
 
-    setBoard(newBoard)
-    setState(({...state, }))
+    if (board[index] != null || checkWinner()) {
+      return null
+    } else {
+      const newBoard = board.slice()
+  
+      if (isXTurn) {
+        newBoard[index] = "X"
+      } else {
+        newBoard[index] = "O"
+      }
+
+      setBoard(newBoard)
+      setIsXTurn((isXTurn) => (!isXTurn))
+      setTurnCount((turnCount) => (turnCount += 1))
+    }
+  }
+
+  function checkWinner() {
+    console.log("checking")
+    const WINNINGLINES = [
+      [0, 1, 2], [3, 4, 5], [6, 7, 8],
+      [0, 3, 6], [1, 4, 7], [2, 5, 8],
+      [0, 4, 8], [2, 4, 6]
+    ]
+
+    for (let i = 0; i < WINNINGLINES.length; i++) {
+
+      const [a,b,c] = WINNINGLINES[i]
+      
+      if (board[a] && board[a] === board[b] && board[b] === board[c]) {
+        console.log('winner!')
+        return board[a]
+      }
+    }
+      return null  
+  }
+
+  function resetGame() {
+    setIsXTurn(true)
+    setBoard(Array(9).fill(null))
+    setTurnCount(0)
   }
 
   const gameBoard = () => {
@@ -36,6 +71,7 @@ function App() {
               index={index}
               value={board[index]}
               updateBoard={updateBoard}
+              key={index}
             />
             )
         }
@@ -46,7 +82,7 @@ function App() {
             </tr>
         )
       }
-  
+      
       // Return completed table
       return (  
         <table>
@@ -55,7 +91,7 @@ function App() {
           </tbody>
         </table>
       )
-    }
+  }
 
   return (
     <div>
@@ -63,8 +99,12 @@ function App() {
       <div id='game-board-container'>
           { gameBoard() }
       </div>
+      <Status 
+      checkWinner={checkWinner}
+      turnCount={turnCount}
+      isXTurn={isXTurn}
+      />
+      <button onClick={resetGame}>Reset</button>
     </div>
   )
 }
-
-export default App
