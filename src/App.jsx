@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './App.css'
-import GameCard from './compnents/GameCards/GameCard'
+import GameCard from './compnents/GameCard'
 import Status from './compnents/Status'
 
 export default function App() {
@@ -11,19 +11,19 @@ export default function App() {
   const [turnCount, setTurnCount] = useState(0)
   
   // App functions
+
   function updateBoard(index) {
 
+    // Check is clicked square is already used or if game has been won.
     if (board[index] != null || checkWinner()) {
       return null
-    } else {
+    } else { // Else update game board.
       const newBoard = board.slice()
-  
-      if (isXTurn) {
-        newBoard[index] = "X"
-      } else {
-        newBoard[index] = "O"
-      }
 
+      // Check who's turn it is.
+      isXTurn ? newBoard[index] = "X" : newBoard[index] = "O"
+
+      // Set new states if possible.
       setBoard(newBoard)
       setIsXTurn((isXTurn) => (!isXTurn))
       setTurnCount((turnCount) => (turnCount += 1))
@@ -42,11 +42,14 @@ export default function App() {
 
       const [a,b,c] = WINNINGLINES[i]
       
+      // Check if board has a winning line.
       if (board[a] && board[a] === board[b] && board[b] === board[c]) {
+        // return winning player if winning line is found.
         console.log('winner!')
         return board[a]
       }
     }
+      // Otherwise return null.
       return null  
   }
 
