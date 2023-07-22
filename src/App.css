@@ -1,0 +1,26 @@
+#root {
+  max-width: 800px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+#game-board-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+table, tr, td {
+  border: 2px solid black;
+}
+
+td {
+  width: 150px;
+  height: 150px;
+}
