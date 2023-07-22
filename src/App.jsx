@@ -18,6 +18,7 @@ function App() {
     }
 
     setBoard(newBoard)
+    setState(({...state, }))
   }
 
   const gameBoard = () => {
