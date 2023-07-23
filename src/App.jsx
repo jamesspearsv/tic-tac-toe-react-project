@@ -9,6 +9,8 @@ export default function App() {
   const [isXTurn, setIsXTurn] = useState(true)
   const [board, setBoard] = useState(Array(9).fill(null))
   const [turnCount, setTurnCount] = useState(0)
+  // TODO: Create time travel history
+  const [moveHistory, setMoveHistory] = useState(Array(9).fill(null))
   
   // App functions
 
